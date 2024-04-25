@@ -3,10 +3,8 @@ package calculator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/** level2 요구사항 3
- * main 메서드에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드에 직접 접근하지 못하도록 캡슐화
- * 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 Getter 메서드
- * 간접 접근을 통해 필드에 접근하여 수정올 수 있도록 구현 Setter 메서드
+/** level2 요구사항 4
+ *  가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드를 구현
  */
 
 public class Calculator {
@@ -51,5 +49,9 @@ public class Calculator {
 
     public Queue<Integer> getResultQueue() {
         return resultQueue;
+    }
+
+    public void removeResultQueue() {
+        resultQueue.remove();
     }
 }
