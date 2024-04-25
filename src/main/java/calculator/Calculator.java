@@ -3,19 +3,23 @@ package calculator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/** level2 요구사항 4
- *  가장 먼저 저장된 데이터를 삭제하는 기능을 가진 메서드를 구현
+/** level2 요구사항 6
+ * Calculator 인스턴스를 생성(new)할 때 생성자를 통해
+ * 연산 결과를 저장하고 있는 컬렉션 필드가 초기화 되도록 수정합니다.
  */
 
 public class Calculator {
-    /* 연산 결과를 저장하는 컬랙션 타입 필드 선언 및 생성 */
+
     int result; // 캡슐화
     private Queue<Integer> resultQueue= new LinkedList<>(); // 연산결과를 저장하는 컬렉션 타입
 
-    public Calculator() {}
+    public Calculator() {
+        resultQueue.clear();
+        System.out.println("resultQueue clear!: " + resultQueue);
+    }
 
     // 결과값을 반환하는 메서드
-    public void calculate(String operator, int firstNumber, int secondNumber) throws
+    public void calculateOperation(String operator, int firstNumber, int secondNumber) throws
             DivisionByZeroException, InvalidOperatorException{
 
         result = 0;
