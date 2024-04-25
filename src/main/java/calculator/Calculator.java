@@ -54,4 +54,10 @@ public class Calculator {
     public void removeResultQueue() {
         resultQueue.remove();
     }
+
+    public void inquiryResultQueue() {
+        for(int value : getResultQueue()) {
+            System.out.print(value + " ");
+        }
+    }
 }

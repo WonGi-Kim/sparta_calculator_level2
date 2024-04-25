@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Queue;
 
-/** level2 요구사항 4
- * Calculator 클래스에 저장된 연산 결과들 중  가장 먼저 저장된 데이터를 삭제하는 기능을 가진
- * 메서드를 구현한 후 App 클래스의 main 메서드에 삭제 메서드가 활용될 수 있도록 수정합니다.
+/** level2 요구사항 5
+ * 연산 결과들을 조회하는 기능을 가진 메서드를 구현한 후
+ * App 클래스의 main 메서드에 조회 메서드가 활용될 수 있도록 수정
  */
 public class App {
     public static void main(String[] args) {
@@ -52,9 +52,7 @@ public class App {
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력시 조회)");
             printQueue = in.next();
             if (printQueue.equals("inquiry")) {
-                for(int value : calculator.getResultQueue()) { // 요구사항 8 향상된 for문을 사용하여 출력
-                    System.out.print(value + " ");
-                }
+                calculator.inquiryResultQueue();
                 System.out.println();
             }
 
