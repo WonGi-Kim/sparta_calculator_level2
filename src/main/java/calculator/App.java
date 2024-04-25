@@ -4,6 +4,11 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Queue;
 
+/** level2 요구사항 3
+ * main 메서드에서 Calculator 클래스의 연산 결과를 저장하고 있는 컬렉션 필드에 직접 접근하지 못하도록 캡슐화
+ * 간접 접근을 통해 필드에 접근하여 가져올 수 있도록 구현 Getter 메서드
+ * 간접 접근을 통해 필드에 접근하여 수정올 수 있도록 구현 Setter 메서드
+ */
 public class App {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -16,8 +21,7 @@ public class App {
         String operand; // 연산자
         int result = 0; // switch 문 밖에서 선언하고 초기화
 
-        //Queue<Integer> resultQueue = new LinkedList<>(); 요구사항에 맞춰 Calculator로 이동
-        Calculator calculator =new Calculator();
+        Calculator calculator = new Calculator();
 
         while (!finish.equals("exit")) {
 
@@ -38,18 +42,18 @@ public class App {
                 throw new RuntimeException(e);
             }
 
-            if(calculator.resultQueue.size() >= 2) { // remove는 큐가 비어있는 경우 예외가 발생하므로 예외 처리를 먼저 해줘야 함
+            if(calculator.getResultQueue().size() >= 2) { // remove는 큐가 비어있는 경우 예외가 발생하므로 예외 처리를 먼저 해줘야 함
                 System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력시 삭제)");
                 stopQueue = in.next();
                 if (stopQueue.equals("remove")) {
-                    calculator.resultQueue.remove();
+                    calculator.getResultQueue().remove();
                 }
             }
 
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력시 조회)");
             printQueue = in.next();
             if (printQueue.equals("inquiry")) {
-                for(int value : calculator.resultQueue) { // 요구사항 8 향상된 for문을 사용하여 출력
+                for(int value : calculator.getResultQueue()) { // 요구사항 8 향상된 for문을 사용하여 출력
                     System.out.print(value + " ");
                 }
                 System.out.println();
