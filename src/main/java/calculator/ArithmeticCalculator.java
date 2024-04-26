@@ -7,16 +7,18 @@ import java.util.Queue;
 
 public class ArithmeticCalculator extends Calculator {
 
-    private AddOperator addOperator;
-    private SubstractOperator substractOperator;
-    private MultiplyOperator multiplyOperator;
-    private DivideOperator divideOperator;
+    private final AddOperator addOperator;
+    private final SubstractOperator substractOperator;
+    private final MultiplyOperator multiplyOperator;
+    private final DivideOperator divideOperator;
+    private final ModOperator modOperator;
 
     public ArithmeticCalculator() {
         this.addOperator = new AddOperator();
         this.substractOperator = new SubstractOperator();
         this.multiplyOperator = new MultiplyOperator();
         this.divideOperator = new DivideOperator();
+        this.modOperator = new ModOperator();
     }
     @Override
     public void calculateOperation (String operator, int firstNumber, int secondNumber) throws
@@ -24,20 +26,19 @@ public class ArithmeticCalculator extends Calculator {
         result = 0;
 
         if (operator.equals("+")) {
-            result = addOperator.add(firstNumber,secondNumber);
-            System.out.println("결과는 : " + result);
+            result = addOperator.operate(firstNumber,secondNumber);
         } else if (operator.equals("-")) {
-            result = substractOperator.substract(firstNumber, secondNumber);
-            System.out.println("결과는 : " + result);
+            result = substractOperator.operate(firstNumber, secondNumber);
         } else if (operator.equals("*")) {
-            result = multiplyOperator.multiply(firstNumber,secondNumber);
-            System.out.println("결과는 : " + result);
+            result = multiplyOperator.operate(firstNumber,secondNumber);
         } else if (operator.equals("/")) {
-            result = divideOperator.divide(firstNumber, secondNumber);
-            System.out.println("결과는 : " + result);
+            result = divideOperator.operate(firstNumber, secondNumber);
+        } else if (operator.equals("%")) {
+            result = modOperator.operate(firstNumber, secondNumber);
         } else {
             throw new InvalidOperatorException("잘못된 연산자 입니다.");
         }
+        System.out.println("결과는 : " + result);
         Queue<Integer> tempQueue = getResultQueue();
         tempQueue.offer(result);
         setResultQueue(tempQueue);

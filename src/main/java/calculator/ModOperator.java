@@ -1,8 +1,8 @@
 package calculator;
 
-public class AddOperator implements OperatorInterface{
+public class ModOperator implements OperatorInterface {
     @Override
     public int operate(int firstNumber, int secondNumber) {
-        return firstNumber + secondNumber;
+        return firstNumber % secondNumber;
     }
 }

@@ -1,7 +1,8 @@
 package calculator;
 
-public class MultiplyOperator {
-    public int multiply(int firstNumber, int secondNumber) {
+public class MultiplyOperator implements OperatorInterface {
+    @Override
+    public int operate(int firstNumber, int secondNumber) {
         return firstNumber * secondNumber;
     }
 }
