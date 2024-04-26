@@ -4,10 +4,6 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Queue;
 
-/** level2 요구사항 6
- * Calculator 인스턴스를 생성(new)할 때 생성자를 통해
- * 연산 결과를 저장하고 있는 컬렉션 필드가 초기화 되도록 수정합니다.
- */
 public class App {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -23,7 +19,9 @@ public class App {
         int calculateType;
         double radius = 0;
 
-        Calculator calculator = new Calculator();
+        ArithmeticCalculator arithmetic = new ArithmeticCalculator();
+        CircleCalculator circle = new CircleCalculator();
+
         System.out.println("실행할 계산기의 번호를 입력하세요");
         System.out.println("사칙연산 : 1");
         System.out.println("반지름 계산기 : 2");
@@ -42,25 +40,25 @@ public class App {
                 b = in.nextInt();
 
                 try {
-                    calculator.calculateOperation(operand,a,b);
+                    arithmetic.calculateOperation(operand,a,b);
                 } catch (DivisionByZeroException e) {
                     throw new RuntimeException(e);
                 } catch (InvalidOperatorException e) {
                     throw new RuntimeException(e);
                 }
 
-                if(calculator.getResultQueue().size() >= 2) { // remove는 큐가 비어있는 경우 예외가 발생하므로 예외 처리를 먼저 해줘야 함
+                if(arithmetic.getResultQueue().size() >= 2) { // remove는 큐가 비어있는 경우 예외가 발생하므로 예외 처리를 먼저 해줘야 함
                     System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력시 삭제)");
                     stopQueue = in.next();
                     if (stopQueue.equals("remove")) {
-                        calculator.removeResultQueue();
+                        arithmetic.removeResultQueue();
                     }
                 }
 
                 System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력시 조회)");
                 printQueue = in.next();
                 if (printQueue.equals("inquiry")) {
-                    calculator.inquiryResultQueue();
+                    arithmetic.inquiryResultQueue();
                     System.out.println();
                 }
 
@@ -74,22 +72,24 @@ public class App {
             }
         } else if (calculateType == 2) {
             while (!finish.equals("exit")) {
+
+
                 System.out.print("계산할 반지름 입력 : ");
                 radius = in.nextDouble();
-                calculator.calculateRadius(radius);
+                circle.calculateRadius(radius);
 
-                if(calculator.getResultQueue2().size() >= 2) { // remove는 큐가 비어있는 경우 예외가 발생하므로 예외 처리를 먼저 해줘야 함
+                if(circle.getResultQueue2().size() >= 2) { // remove는 큐가 비어있는 경우 예외가 발생하므로 예외 처리를 먼저 해줘야 함
                     System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력시 삭제)");
                     stopQueue = in.next();
                     if (stopQueue.equals("remove")) {
-                        calculator.removeResultQueue2();
+                        circle.removeResultQueue2();
                     }
                 }
 
                 System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력시 조회)");
                 printQueue = in.next();
                 if (printQueue.equals("inquiry")) {
-                    calculator.inquiryResultQueue2();
+                    circle.inquiryResultQueue2();
                     System.out.println();
                 }
 

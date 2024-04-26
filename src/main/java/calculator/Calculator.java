@@ -4,10 +4,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class Calculator {
+public abstract class Calculator {
 
     int result;
-    private Queue<Integer> resultQueue= new LinkedList<>();// 연산결과를 저장하는 컬렉션 타입, 캡슐화
+    private Queue<Integer> resultQueue= new LinkedList<>();
+    // 연산결과를 저장하는 컬렉션 타입, 캡슐화 private -> protected 변경
+    // 접근 제어자를 변경할 경우 Arithmetic 클래스 내부 변경
+    // protected Queue<Integer> resultQueue= new LinkedList<>();
 
     double result2;
     private Queue<Double> resultQueue2 = new LinkedList<>();
@@ -18,8 +21,14 @@ public class Calculator {
         System.out.println("resultQueue clear!: " + resultQueue);
         System.out.println("resultQueue2 clear!: " + resultQueue2);
     }
+    // 여기부터 추상 메서드 추가
+    public abstract void calculateOperation(String operator, int firstNumber, int secondNumber) throws
+            DivisionByZeroException, InvalidOperatorException;
+    public abstract void calculateRadius (double radius);
+
 
     // 결과값을 반환하는 메서드
+    /*
     public final void calculateOperation(String operator, int firstNumber, int secondNumber) throws
             DivisionByZeroException, InvalidOperatorException{
 
@@ -46,8 +55,7 @@ public class Calculator {
         }
         resultQueue.offer(result);
         setResultQueue(resultQueue);
-    }
-
+    } */
     public void setResultQueue(Queue<Integer> resultQueue) {
         this.resultQueue = resultQueue;
     }
@@ -65,13 +73,13 @@ public class Calculator {
             System.out.print(value + " ");
         }
     }
-
-    public final void calculateRadius(double radius) {
+    /* public final void calculateRadius(double radius) {
         result2 = 0;
         result2 = radius * radius * Math.PI;
         resultQueue2.offer(result2);
         setResultQueue2(resultQueue2);
-    }
+    }*/
+
     public void setResultQueue2(Queue<Double> resultQueue2) {
         this.resultQueue2 = resultQueue2;
     }
