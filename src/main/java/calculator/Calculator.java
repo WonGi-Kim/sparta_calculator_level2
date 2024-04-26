@@ -3,23 +3,24 @@ package calculator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/** level2 요구사항 6
- * Calculator 인스턴스를 생성(new)할 때 생성자를 통해
- * 연산 결과를 저장하고 있는 컬렉션 필드가 초기화 되도록 수정합니다.
- */
 
 public class Calculator {
 
-    int result; // 캡슐화
-    private Queue<Integer> resultQueue= new LinkedList<>(); // 연산결과를 저장하는 컬렉션 타입
+    int result;
+    private Queue<Integer> resultQueue= new LinkedList<>();// 연산결과를 저장하는 컬렉션 타입, 캡슐화
+
+    double result2;
+    private Queue<Double> resultQueue2 = new LinkedList<>();
 
     public Calculator() {
         resultQueue.clear();
+        resultQueue2.clear();
         System.out.println("resultQueue clear!: " + resultQueue);
+        System.out.println("resultQueue2 clear!: " + resultQueue2);
     }
 
     // 결과값을 반환하는 메서드
-    public void calculateOperation(String operator, int firstNumber, int secondNumber) throws
+    public final void calculateOperation(String operator, int firstNumber, int secondNumber) throws
             DivisionByZeroException, InvalidOperatorException{
 
         result = 0;
@@ -64,4 +65,39 @@ public class Calculator {
             System.out.print(value + " ");
         }
     }
+
+    public final void calculateRadius(double radius) {
+        result2 = 0;
+        result2 = radius * radius * Math.PI;
+        resultQueue2.offer(result2);
+        setResultQueue2(resultQueue2);
+    }
+    public void setResultQueue2(Queue<Double> resultQueue2) {
+        this.resultQueue2 = resultQueue2;
+    }
+
+    public Queue<Double> getResultQueue2() {
+        return resultQueue2;
+    }
+
+    public void removeResultQueue2() {
+        resultQueue2.remove();
+    }
+
+    public void inquiryResultQueue2() {
+        for(double value : getResultQueue2()) {
+            System.out.print(value + " ");
+        }
+    }
 }
+
+/** 메서드는 final이 가능하다고 생각됨 :
+ *  기능적으로 요구사항에 맞춰져 완성되었기 때문에
+ *  수정하여 안정성을 낮추지 않으려면 final선언을 활용할 수 있다고 생각됨
+ *
+ *  다만 static은 활용성이 떨어진다고 생각됨 :
+ *  변수 result, result2 모두 값을 저장하고 그 값을 큐에 삽입 후
+ *  다시 초기화 하는 과정이 있기에 더미값이 들어가지 않는다고 생각되는데
+ *  정적 변수인 static선언 시 저장되는 값이 바뀌지 않을 가능성이 있다고 생각
+ */
+
